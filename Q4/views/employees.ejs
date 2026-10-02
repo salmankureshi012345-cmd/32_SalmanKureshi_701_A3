@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Employee List</title>
+</head>
+
+<body>
+
+    <h1>Employee List</h1>
+
+    <a href="/add">
+        Add Employee
+    </a>
+
+    <br><br>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Basic Salary</th>
+            <th>HRA</th>
+            <th>DA</th>
+            <th>Total Salary</th>
+            <th>Action</th>
+
+        </tr>
+
+        <% employees.forEach(function(employee) { %>
+
+            <tr>
+
+                <td>
+                    <%= employee.empid %>
+                </td>
+
+                <td>
+                    <%= employee.name %>
+                </td>
+
+                <td>
+                    <%= employee.email %>
+                </td>
+
+                <td>
+                    <%= employee.department %>
+                </td>
+
+                <td>
+                    <%= employee.basicSalary %>
+                </td>
+
+                <td>
+                    <%= employee.hra %>
+                </td>
+
+                <td>
+                    <%= employee.da %>
+                </td>
+
+                <td>
+                    <%= employee.totalSalary %>
+                </td>
+
+                <td>
+
+                    <a href="/edit/<%= employee._id %>">
+                        Edit
+                    </a>
+
+                    <br><br>
+
+                    <a href="/delete/<%= employee._id %>">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+        <% }); %>
+
+    </table>
+
+    <br>
+
+    <a href="/dashboard">
+        Back to Dashboard
+    </a>
+
+</body>
+
+</html>
