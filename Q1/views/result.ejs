@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Registration Result</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+    <h1>Registration Successful</h1>
+
+    <table>
+
+        <tr>
+            <th>Field</th>
+            <th>Data</th>
+        </tr>
+
+        <tr>
+            <td>Username</td>
+            <td><%= username %></td>
+        </tr>
+
+        <tr>
+            <td>Password</td>
+            <td><%= password %></td>
+        </tr>
+
+        <tr>
+            <td>Email</td>
+            <td><%= email %></td>
+        </tr>
+
+        <tr>
+            <td>Gender</td>
+            <td><%= gender %></td>
+        </tr>
+
+        <tr>
+            <td>Hobbies</td>
+
+            <td>
+
+                <% hobbies.forEach(function(hobby) { %>
+
+                    <%= hobby %><br>
+
+                <% }) %>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>Profile Picture</td>
+
+            <td>
+
+                <img
+                    src="/uploads/<%= profilePic %>"
+                    width="150"
+                >
+
+                <br>
+
+                <a href="/download/<%= profilePic %>">
+                    Download
+                </a>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>Other Pictures</td>
+
+            <td>
+
+                <% otherPics.forEach(function(pic) { %>
+
+                    <img
+                        src="/uploads/<%= pic.filename %>"
+                        width="120"
+                    >
+
+                    <a href="/download/<%= pic.filename %>">
+                        Download
+                    </a>
+
+                    <br><br>
+
+                <% }) %>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <br>
+
+    <a href="/">
+        Register Again
+    </a>
+
+</body>
+
+</html>
