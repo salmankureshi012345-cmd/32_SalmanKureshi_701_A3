@@ -4,13 +4,10 @@ const FileStore = require("session-file-store")(session);
 
 const app = express();
 
-// View engine setup
 app.set("view engine", "ejs");
 
-// Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 
-// Express Session configuration with FileStore
 app.use(
     session({
         store: new FileStore({ path: "./sessions" }),
@@ -20,12 +17,11 @@ app.use(
         cookie: {
             httpOnly: true,
             secure: false,
-            maxAge: 30 * 60 * 1000 // 30 minutes session limit
+            maxAge: 30 * 60 * 1000 
         }
     })
 );
 
-// Authentication middleware to guard protected pages
 function checkLogin(req, res, next) {
     if (req.session.username) {
         next();
@@ -34,16 +30,13 @@ function checkLogin(req, res, next) {
     }
 }
 
-// GET: Display login page
 app.get("/", function (req, res) {
     res.render("login", { error: "" });
 });
 
-// POST: Process user login
 app.post("/login", function (req, res) {
     const { username, password } = req.body;
 
-    // Verify credentials
     if (username === "admin" && password === "12345") {
         req.session.username = username;
         res.redirect("/home");
@@ -54,7 +47,6 @@ app.post("/login", function (req, res) {
     }
 });
 
-// Protected routes (Only accessible if logged in)
 app.get("/home", checkLogin, function (req, res) {
     res.render("home",{ username: req.session.username });
     // res.send("welcome "+ req.session.username);
@@ -68,7 +60,6 @@ app.get("/dashboard", checkLogin, function (req, res) {
     res.render("dashboard", { username: req.session.username });
 });
 
-// GET: Destroy session and log out
 app.get("/logout", function (req, res) {
     req.session.destroy(function (err) {
         if (err) {
@@ -78,7 +69,6 @@ app.get("/logout", function (req, res) {
     });
 });
 
-// Start server on port 3000
 app.listen(3000, function () {
     console.log("Server running at http://localhost:3000");
 });
